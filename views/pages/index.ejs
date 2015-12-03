@@ -3,7 +3,8 @@
 <!DOCTYPE html>
 <html lang="ens">
 <head>
-    <% include ../partials/head %>
+  <% include ../partials/head %>
+  <link rel='stylesheet' type='text/css' href='/stylesheets/index.css' />
 </head>
 <body class="container">
 
@@ -24,27 +25,56 @@
     <section class="main container-fluid" id="s1">
       <div class="container-fluid">
         <div class="row">
-          <div class="col-md-4 col-md-offset-1">
+          <hr class="section-heading-spacer">
+          <div class="col-md-12">
             <h2>Introducción</h2>
             <br>
             <p>Esta página web, ha sido creada con la intención de servir como una guía del uso de mongoDB y Node-JS,
               para mis compañeros de Sistemas y Tecnologías Web, impartida por Casiano.</p>
+              <p>La práctica estará divida en dos partes, una parte teórica y una parte práctica. En la primera parte,
+              se explicará qué es MongoDB, y que la diferencia de otras bases de datos, además se introducirá su implantación
+             con Node-JS, siendo este apartado, el más importante para poder realizar la tarea que se mandará. La parte práctica
+            consistirá en aplicar los conocimientos aprendidos en la parte de teoría, para conectar una base de datos Mongo con
+          una plantilla, realizar inscripciones y busquedas.</p>
+          </div>
+        </div>
+        <div class="row">
+          <hr class="section-heading-spacer">
+          <div class="col-md-4">
+            <h2>¿Qué vamos a necesitar?</h2>
+            <br>
+            <p>Para este pequeño tutorial necesitaremos usar nuestras máquinas virtuales del <a href="http://iaas.ull.es/">iass</a>
+            , en las cuales necesitaremos instalar mongoDB junto con Node-js. Toda la información necesaria, la encontrarán en el
+            el la sección de 'Tutorial' que se encuentra en la barra de navegación. Cualquier duda, no duden en alzar la mano durante la clase.</p>
+          </div>
+          <div class="col-md-6 col-md-offset-2" id="iass-logo">
+            <img src="images/home-page/iass.png" alt="node-js icon">
+          </div>
+        </div>
+        <div class="row">
+          <hr class="section-heading-spacer">
+          <div class="col-md-6">
+            <img src="images/home-page/node-js.png" alt="node-js icon">
           </div>
           <div class="col-md-4 col-md-offset-1">
+            <h2>¿Qué es Node-JS?</h2>
+            <br>
+            <p>Node.js es un entorno en tiempo de ejecución multiplataforma, de código abierto, para la capa del servidor
+              (pero no limitándose a ello) basado en el lenguaje de programación ECMAScript, asíncrono, con I/O de datos
+              en una arquitectura orientada a eventos y basado en el motor V8 de Google.</p>
+          </div>
+        </div>
+        <div class="row">
+          <hr class="section-heading-spacer">
+          <div class="col-md-4">
             <h2>¿Qué es MongoDB?</h2>
             <br>
             <p>Es una base de datos ágil que permite a los esquemas cambiar rápidamente cuando las aplicaciones evolucionan,
               proporcionando siempre la funcionalidad que los desarrolladores esperan de las bases de datos tradicionales,
               tales como índices secundarios, un lenguaje completo de búsquedas y consistencia estricta.</p>
           </div>
-        </div>
-        <div class="row">
-          <div class="col-md-12">
-            <h2>¿Qué vamos a necesitar?</h2>
-            <br>
-            <p>Para este pequeño tutorial necesitaremos usar nuestras máquinas virtuales del <a href="http://iaas.ull.es/">iass</a>
-             en las cuales, necesitaremos instalar mongoDB junto con Node-js. Toda la información necesaria, la encontrarán en el
-            el la sección de 'Tutorial' que se encuentra en la barra de navegación. Cualquier duda, no duden en alzar la mano durante la clase.</p>
+          <div class="col-md-6 col-md-offset-2">
+            <img src="images/home-page/mongoDB.png" alt="mongoDB icon">
           </div>
         </div>
       </div>

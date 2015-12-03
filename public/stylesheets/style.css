@@ -1,6 +1,8 @@
 body {
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  background-image: url("../images/fondo2.jpg");
+  background-repeat: round;
 }
 
 a {
@@ -38,10 +40,4 @@ footer {
   top: 50%;
   transform: translate(0, -50%);
   padding-left: 1%;
-}
-
-#carousel1{
-  padding-left: 3%;
-  padding-right: 3%;
-  margin: 0 auto;
 }
