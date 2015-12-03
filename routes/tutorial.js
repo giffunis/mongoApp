@@ -1,9 +1,8 @@
 var express = require('express');
-var router = express.Router();
+var tutorialRoute = express.Router();
+var tutorialController = require('../controllers/tutorial_controller');
 
-/* GET users listing. */
-router.get('/', function(req, res, next) {
-  res.send('respond with a resource');
-});
+/* GET tutorial page. */
+tutorialRoute.get('/', tutorialController.home);
 
-module.exports = router;
+module.exports = tutorialRoute;
