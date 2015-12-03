@@ -9,7 +9,7 @@
 
   <div id="page-wrap">
 
-    <header class="main" id="h1">
+    <header class="page-header" id="header1">
       <% include ../partials/header %>
     </header>
 
@@ -17,7 +17,38 @@
       <% include ../partials/nav %>
     </nav>
 
-    <section class="main" id="s1">
+    <section id="carousel1" class="container-fluid">
+      <% include ../partials/carousel1 %>
+    </section>
+
+    <section class="main container-fluid" id="s1">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-md-4 col-md-offset-1">
+            <h2>Introducción</h2>
+            <br>
+            <p>Esta página web, ha sido creada con la intención de servir como una guía del uso de mongoDB y Node-JS,
+              para mis compañeros de Sistemas y Tecnologías Web, impartida por Casiano.</p>
+          </div>
+          <div class="col-md-4 col-md-offset-1">
+            <h2>¿Qué es MongoDB?</h2>
+            <br>
+            <p>Es una base de datos ágil que permite a los esquemas cambiar rápidamente cuando las aplicaciones evolucionan,
+              proporcionando siempre la funcionalidad que los desarrolladores esperan de las bases de datos tradicionales,
+              tales como índices secundarios, un lenguaje completo de búsquedas y consistencia estricta.</p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <h2>¿Qué vamos a necesitar?</h2>
+            <br>
+            <p>Para este pequeño tutorial necesitaremos usar nuestras máquinas virtuales del <a href="http://iaas.ull.es/">iass</a>
+             en las cuales, necesitaremos instalar mongoDB junto con Node-js. Toda la información necesaria, la encontrarán en el
+            el la sección de 'Tutorial' que se encuentra en la barra de navegación. Cualquier duda, no duden en alzar la mano durante la clase.</p>
+          </div>
+        </div>
+      </div>
+
     </section>
 
     <footer class="nav" id="f1">
