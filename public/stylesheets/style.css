@@ -13,12 +13,6 @@ a {
   margin-top: -6%;
 }
 
-/* nav-bar */
-#mongodbIcon {
-  height: 40px;
-  width: 100px;
-  margin-top: -10%;
-}
 
 /* header */
 
@@ -35,9 +29,17 @@ footer {
   box-sizing: border-box;
 }
 
-#gitHubIcon {
+.footer-icons {
   position: absolute;
-  top: 50%;
-  transform: translate(0, -50%);
-  padding-left: 1%;
+  transform: translate(0, 14%);
+}
+
+#mongodbIcon {
+  height: 40px;
+  width: 100px;
+}
+#node-js64 {
+  height: 40px;
+  width: 40px;
+  margin-left: 54%;
 }
