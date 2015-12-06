@@ -1,0 +1,128 @@
+<!-- views/pages/index.ejs -->
+
+<!DOCTYPE html>
+<html lang="ens">
+<head>
+  <% include ../partials/head %>
+  <link rel='stylesheet' type='text/css' href='/stylesheets/index.css' />
+</head>
+<body class="container">
+
+  <div id="page-wrap">
+
+    <header class="page-header" id="header1">
+      <% include ../partials/header %>
+    </header>
+
+    <nav class="navbar navbar-inverse">
+      <% include ../partials/nav %>
+    </nav>
+
+    <section class="main container-fluid" id="s1">
+      <h2 id="tutorial-de-mongodb.">Tutorial de MongoDB.</h2>
+      <h3 id="introducción.">1. Introducción.</h3>
+      <p>MongoDB es una base de datos orientada a documentos. Esto quiere decir que en lugar de guardar los datos en registros, guarda los datos en documentos. Estos documentos son almacenados en BSON, que es una representación binaria de JSON. La diferencia fundamental con las bases de datos relacionales es, que no es necesario seguir un esquema. Por ejemplo:</p>
+      <pre><code># Primer empleado.
+      {name: &quot;Pancho&quot;,
+      edad: 24,
+      puesto: &quot;redactor&quot;}
+
+      # Segundo empleado.
+      {name: &quot;Fernando&quot;,
+      edad: 30,
+      salario: 3000,
+      puesto: &quot;Servicio técnico&quot;}</code></pre>
+      <p>Ventajas: * Su capacidad para escalar horizontalmente. * En el buen rendimiento que ofrece en general en las operaciones de lectura. * En su capacidad para adaptarse a los cambios en la estructura de la información. * En las posibilidades que ofrecen sus índices. * La facilidad que ofrece para programar aplicaciones en muy diversos lenguajes.</p>
+      <p>Desventajas: * las características del mundo relacional que no implementa, por ejemplo, el JOIN. Sobre todo si trabajamos con información eminentemente relacional y que no varía. * Las posibles mermas de rendimiento que pueden tener lugar en aplicaciones en las que las operaciones de escritura sean muy intensas.</p>
+      <h3 id="instalación.">2. Instalación.</h3>
+      <p>MongoDB se encuentra disponible para Windows, Linux y Mac.</p>
+      <ul>
+      <li><a href="https://docs.mongodb.org/manual/tutorial/install-mongodb-on-os-x/">Instalación para Mac.</a></li>
+      <li><a href="https://docs.mongodb.org/manual/administration/install-on-linux/">Instalación para Ubuntu.</a></li>
+      <li><a href="https://docs.mongodb.org/manual/tutorial/install-mongodb-on-windows/">Instalación para Windows.</a></li>
+      </ul>
+      <h3 id="comandos-esenciales">3. Comandos esenciales</h3>
+      <p>Para iniciar MongoDB en Linux:</p>
+      <pre><code>sudo service mongod start</code></pre>
+      <p>Para detener la MongoDB:</p>
+      <pre><code>sudo service mongod stop</code></pre>
+      <p>Reiniciar la MongoDB:</p>
+      <pre><code>sudo service mongod restart</code></pre>
+      <p>El puerto por defecto en el que arranca es, 27017. El puerto es configurado en la ruta <code>/etc/mongod.conf</code>.</p>
+      <div class="figure">
+      <img src="imagenesMarkdown/mongod.conf.png" alt="/etc/mongod.conf" />
+      <p class="caption">/etc/mongod.conf</p>
+      </div>
+      <p>Para especificar la carpeta de datos se utiliza el siguiente comando:</p>
+      <pre><code>mongod --dbpath /Users/jose/Desktop/data</code></pre>
+      <h3 id="comandos-básicos-de-la-consola.">4. Comandos básicos de la consola.</h3>
+      <p>Para arrancar la consola utilizaremos el siguiente comando:</p>
+      <pre><code>$ mongo</code></pre>
+      <p>Es importante haber arrrancado el servicio con el comando especificado para ello en el punto 3.</p>
+      <h4 id="insert">4.1 Insert</h4>
+      <p>Insertar documentos es muy sencillo. Solo hay que conectarse la consola y escribir el comando:</p>
+      <pre><code>db.nombre_coleccion.insert(documento)</code></pre>
+      <p>Un ejemplo sería:</p>
+      <pre><code>db.familia.insert({_id:1,name:&quot;Carlos&quot;, parentesco:&quot;Padre&quot;} )</code></pre>
+      <p>Insertar varios objetos a la vez (utilizaremos un array de documentos):</p>
+      <pre><code>db.familia.insert(
+      [
+        {id_:2, name:&quot;Claudia&quot;, parentesco:&quot;Madre&quot;, nacionalidad:&quot;Colombiana&quot;},
+        {id_:3, name:&quot;Joyce&quot;, apellido:&quot;Giffuni&quot;, parentesco:&quot;Hermana&quot;}
+      ])</code></pre>
+      <h4 id="update">4.2 Update</h4>
+      <p>Para actualizar datos, podemos utilizar la sentencia <em>update</em>:</p>
+      <p>Por ejemplo:</p>
+      <pre><code>db.familia.update(
+          {_id : 2},
+          {name : &quot;Claudia Liliana&quot;}
+      )</code></pre>
+      <p>Después el resultado sería:</p>
+      <pre><code>{ &quot;_id&quot; : 2, &quot;name&quot; : &quot;Claudia Liliana&quot; }</code></pre>
+      <p>Se puede ver, que MongoDB ha modificado el documento por completo.</p>
+      <h5 id="para-modificar-el-documento-sin-que-nos-cree-uno-nuevo-utilizaremos-set">4.2.1 Para modificar el documento sin que nos cree uno nuevo, utilizaremos: <em>$set</em></h5>
+      <pre><code>db.familia.update(
+          {_id:2},
+          {$set:{name: Claudia Liliana}}
+      )</code></pre>
+      <p>El resultado es este:</p>
+      <pre><code>{ &quot;_id&quot; : 2, &quot;name&quot; : &quot;Claudia Liliana&quot;, &quot;parentesco&quot; : &quot;Madre&quot; }</code></pre>
+      <p>El <em>$set</em> también sirve para añadir un campo nuevo. Ejemplo:</p>
+      <pre><code>db.familia.update(
+          {_id:1},
+          {$set:{profesión:&quot;médico&quot;}}
+      )</code></pre>
+      <p>Dando como resultado:</p>
+      <pre><code>{ &quot;_id&quot; : 1, &quot;name&quot; : &quot;Carlos&quot;, &quot;parentesco&quot; : &quot;Padre&quot;, &quot;profesión&quot; : &quot;Médico&quot; }</code></pre>
+      <h5 id="para-eliminar-campos-se-usa-el-unset">4.2.2 Para eliminar campos se usa el <em>$unset</em></h5>
+      <p>Por ejemplo para eliminar el campo profesión utilizaríamos:</p>
+      <pre><code>{$unset:{&quot;profesión&quot;:&quot;&quot;}}.</code></pre>
+      <h4 id="el-comando-find">4.3 El comando <em>find()</em></h4>
+      <p>La función <em>find</em> nos permite buscar documentos en una colección. Si no le pasamos ningún parámetro, se buscarán todos los elementos en la colección.</p>
+      <pre><code>db.familia.find()</code></pre>
+      <p>Para hacer una búsqueda sesgada: db.familia.find({n_campo:&quot;atributo&quot;})</p>
+      <h4 id="integración-con-node-js">5. Integración con node-js</h4>
+      <p>Les remito a mi <a href="https://tutorial-alu0100770551.herokuapp.com/tutorial/node/">página web.</a></p>
+      <h4 id="enlaces-recomendados-para-profundizar-un-poco-más">6. Enlaces recomendados para profundizar un poco más</h4>
+      <p><a href="http://www.genbetadev.com/trabajar-como-desarrollador/mongodb-encuentra-tus-datos-con-consultas-simples">Encuentra tus datos con consultas simples</a></p>
+      <p><a href="http://www.genbetadev.com/bases-de-datos/mongodb-la-vida-cambia-tus-datos-tambien-operaciones-de-actualizacion-simples">Otros modificadores útiles</a></p>
+      <p><a href="http://www.genbetadev.com/bases-de-datos/mongodb-la-vida-cambia-tus-datos-tambien-actualiza-subdocumentos-y-anade-datos-a-un-array">Para profundizar más.</a></p>
+      <p><a href="http://www.genbetadev.com/bases-de-datos/mongodb-creacion-y-utilizacion-de-indices">Creación y actualización de índices</a></p>
+      <h3 id="enlaces-usados-para-hacer-este-tutorial">Enlaces usados para hacer este tutorial</h3>
+      <ul>
+      <li><a href="http://cursoderails.com/cuando-usar-mongodb">Curso de Rails</a></li>
+      <li><a href="http://www.genbetadev.com/bases-de-datos/mongodb-que-es-como-funciona-y-cuando-podemos-usarlo-o-no">MongoDB: qué es, cómo funciona y cuándo podemos usarlo (o no)</a></li>
+      <li><a href="http://www.genbetadev.com/bases-de-datos/mongodb-empezando-por-el-principio-insertando-datos">MongoDB: empezando por el principio. Insertando datos</a></li>
+      <li><a href="http://www.genbetadev.com/bases-de-datos/mongodb-la-vida-cambia-tus-datos-tambien-operaciones-de-actualizacion-simples">MongoDB: la vida cambia, tus datos también. Operaciones de actualización simples</a></li>
+      </ul>
+
+    </section>
+
+    <footer class="nav" id="f1">
+        <% include ../partials/footer %>
+    </footer>
+
+  </div> <!-- id="page-wrap"-->
+
+</body>
+</html>
