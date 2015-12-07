@@ -1,0 +1,53 @@
+<!-- views/pages/index.ejs -->
+
+<!DOCTYPE html>
+<html lang="ens">
+<head>
+  <% include ../partials/head %>
+  <link rel='stylesheet' type='text/css' href='/stylesheets/index.css' />
+</head>
+<body class="container">
+
+  <div id="page-wrap">
+
+    <header class="page-header" id="header1">
+      <% include ../partials/header %>
+    </header>
+
+    <nav class="navbar navbar-inverse">
+      <% include ../partials/nav %>
+    </nav>
+
+    <section class="main container-fluid" id="s1">
+      <div class="row">
+        <h2><%- title %></h2>
+      </div>
+      <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+          <form role="form" method="post">
+             <div class="form-group">
+               <label for="username">Username:</label>
+               <input name="username" class="form-control" id="email" placeholder="Nombre de usuario">
+             </div>
+             <div class="form-group">
+               <label for="password">Password:</label>
+               <input type="password" class="form-control" id="password" name="password" placeholder="Contraseña">
+             </div>
+             <div class="form-group">
+               <label for="email">Email:</label>
+               <input type="email" class="form-control" id="email" name="email" placeholder="Correo">
+             </div>
+             <button type="submit" class="btn btn-default">Registrar!</button>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <footer class="nav" id="f1">
+        <% include ../partials/footer %>
+    </footer>
+
+  </div> <!-- id="page-wrap"-->
+
+</body>
+</html>
