@@ -1,0 +1,125 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title></title>
+  <style type="text/css">code{white-space: pre;}</style>
+</head>
+<body>
+<h2 id="mongodb-y-nodejs.">MongoDB y NodeJS.</h2>
+<h3 id="introducción.">1. Introducción.</h3>
+<p>Conectar nuestra base de datos de MongoDB con una aplicación cualquiera implementada con Node es, bastante sencillo gracias a <em><a href="http://mongoosejs.com/">Mongoose</a></em></p>
+<h3 id="instalación-de-mongoose.">2. Instalación de Mongoose.</h3>
+<p>Introducir en la consola:</p>
+<pre><code>npm install mongoose --save</code></pre>
+<p>Esta línea nos instalará mongoose en nuestra aplicación y actualizará el package.json.</p>
+<p>Ahora, en el app.js, debemos añadir:</p>
+<pre><code>var mongoose = require(&#39;mongoose&#39;);</code></pre>
+<h3 id="creación-de-un-modelo-de-usuario.">3. Creación de un modelo de usuario.</h3>
+<p>Para prácticar, crearemos un Modelo de usuario, el cual es el siguiente:</p>
+<pre><code>var mongoose = require(&#39;mongoose&#39;);
+var Schema = mongoose.Schema;
+
+var userSchema = new Schema({
+  username: String,
+  password: String,
+  email: {type: String, required: true, index:{unique:true}}
+});
+
+// we need to create a model using it
+var User = mongoose.model(&#39;User&#39;, userSchema);
+
+// make this available to our users in our Node applications
+module.exports = User;</code></pre>
+<h3 id="función-del-controlador-para-ver-los-usuarios-registrados.">4. Función del controlador para ver los usuarios registrados.</h3>
+<pre><code>// Creación de la Conexión
+var mongoose = require(&#39;mongoose&#39;);
+mongoose.connect(&#39;mongodb://localhost/registros&#39;);
+
+// Creación de variables para cargar el modelo
+User = require(&#39;../models/usuarios&#39;);
+
+
+exports.listaUsuarios = function (req, res) {
+  User.find(function(err, users) {
+    if (err) throw err;
+    return res.render(&#39;pages/usuarios&#39;, { title: &#39;Resultados&#39;, usuarios: users });
+  });
+};</code></pre>
+<h3 id="router-y-vista-de-los-usuarios-registrados.">5. Router y Vista de los usuarios registrados.</h3>
+<p>Route:</p>
+<pre><code>var express = require(&#39;express&#39;);
+var usuariosRoute = express.Router();
+var usuariosController = require(&#39;../controllers/usuarios_controller&#39;);
+
+/* GET tutorial page. */
+usuariosRoute.get(&#39;/&#39;, usuariosController.listaUsuarios);
+
+module.exports = usuariosRoute;</code></pre>
+<p>En app.js:</p>
+<pre><code>var usuariosRoute = require(&#39;./routes/usuarios&#39;);
+app.use(&#39;/usuarios&#39;, usuariosRoute);</code></pre>
+<p><code>pages/usuarios</code>:</p>
+<pre><code>&lt;div class=&quot;row&quot;&gt;
+    &lt;h2&gt;&lt;%- title %&gt;&lt;/h2&gt;
+&lt;/div&gt;
+
+&lt;div class=&quot;row&quot;&gt;
+    &lt;% if(usuarios.length != null){ %&gt;
+        &lt;table class=&quot;table table-bordered&quot;&gt;
+            &lt;tr&gt;
+                &lt;td&gt;&lt;strong&gt;Username&lt;/strong&gt;&lt;/td&gt;
+                &lt;td&gt;&lt;strong&gt;Password&lt;/strong&gt;&lt;/td&gt;
+                &lt;td&gt;&lt;strong&gt;Email&lt;/strong&gt;&lt;/td&gt;
+                &lt;td&gt;&lt;strong&gt;Link&lt;/strong&gt;&lt;/td&gt;
+            &lt;/tr&gt;
+            &lt;%for(var i = 0; i &lt; usuarios.length; i++){ %&gt;
+                &lt;tr&gt;
+                    &lt;td&gt; &lt;%= usuarios[i].username %&gt; &lt;/td&gt;
+                    &lt;td&gt; &lt;%= usuarios[i].password %&gt;&lt;/td&gt;
+                    &lt;td&gt; &lt;%= usuarios[i].email %&gt;&lt;/td&gt;
+                    &lt;td&gt;&lt;a href= &lt;%=&#39;/usuarios/&#39;+ usuarios[i].username%&gt; &gt;Link.&lt;/a&gt;&lt;/td&gt;
+                &lt;/tr&gt;
+            &lt;% } %&gt;
+        &lt;/table&gt;
+    &lt;% } %&gt;
+&lt;/div&gt;</code></pre>
+<h3 id="función-del-controlador-para-ver-un-sólo-usuario.">6. Función del controlador para ver un sólo usuario.</h3>
+<p>Route:</p>
+<pre><code>usuariosRoute.post(&#39;/:id&#39;, usuariosController.usuario);</code></pre>
+<p>Controlador:</p>
+<pre><code>exports.usuario = function(req,res){
+  User.findOne({username:req.params.id},function(err, user) {
+    if (err) throw err;
+    return res.render(&#39;pages/usuario&#39;, { usuario: user});
+  });
+};</code></pre>
+<h3 id="como-sería-para-actualizar-un-usuario">7. ¿Como sería para actualizar un usuario?</h3>
+<pre><code>User.findBy({username:req.params.id},function(err, user) {
+    if (err) res.send(err);
+
+            // update the users info only if its new
+            if (req.body.username) user.username = req.body.username;
+            if (req.body.password) user.password = req.body.password;
+            if (req.body.email) user.email = req.body.email;
+
+            // save the user
+            user.save(function(err) {
+                if (err) res.send(err);
+
+                // return a message
+                res.json({ message: &#39;Usuario actualizado&#39; });
+            });
+
+        });
+    })”</code></pre>
+<h3 id="más-información">8. Más información:</h3>
+<ul>
+<li><a href="http://mongoosejs.com/docs/2.7.x/docs/updating-documents.html">Model.update</a></li>
+<li><a href="https://leanpub.com/mean-machine">Libro: Mean Machine</a></li>
+<li><a href="https://scotch.io/tutorials/using-mongoosejs-in-node-js-and-mongodb-applications">Easily Develop Node.js and MongoDB Apps with Mongoose</a></li>
+</ul>
+</body>
+</html>

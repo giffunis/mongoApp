@@ -7,5 +7,6 @@ tutorialRoute.get('/', tutorialController.home);
 
 /* Get tutorial/node */
 tutorialRoute.get('/mongodb',tutorialController.mongodb_get);
+tutorialRoute.get('/node',tutorialController.mongoose_get);
 
 module.exports = tutorialRoute;
