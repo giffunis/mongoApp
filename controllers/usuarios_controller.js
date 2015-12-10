@@ -1,6 +1,5 @@
-// Creación de la Conexión
+
 var mongoose = require('mongoose');
-// mongoose.connect('mongodb://localhost/registros');
 
 // Creación de variables para cargar el model
 User = require('../models/usuarios');

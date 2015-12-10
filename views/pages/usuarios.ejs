@@ -31,15 +31,11 @@
         <% if(usuarios.length != null){ %>
           <table class="table table-bordered">
             <tr>
-              <td><strong>Username</strong></td>
-              <td><strong>Password</strong></td>
               <td><strong>Email</strong></td>
               <td><strong>Link</strong></td>
             </tr>
             <%for(var i = 0; i < usuarios.length; i++){ %>
               <tr>
-                <td> <%= usuarios[i].username %> </td>
-                <td> <%= usuarios[i].password %></td>
                 <td> <%= usuarios[i].email %></td>
                 <td><a href= <%='/usuarios/'+ usuarios[i].username%> >Link.</a></td>
               </tr>
