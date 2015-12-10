@@ -10,6 +10,8 @@ var usuariosRoute = require('./routes/usuarios');
 var registrarRoute = require('./routes/registrar');
 
 var mongoose = require('mongoose');
+mongoose.connect('mongodb://localhost/registros');
+
 
 var expressLayouts = require('express-ejs-layouts');
 var app = express();
