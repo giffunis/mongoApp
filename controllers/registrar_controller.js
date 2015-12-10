@@ -19,6 +19,6 @@ exports.registrar = function(req,res){
       else
         return res.send(err);
     }
-    res.redirect('/buscar');
+    res.redirect('/usuarios');
   });
 };
