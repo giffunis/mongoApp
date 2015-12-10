@@ -6,10 +6,6 @@ exports.home = function(req,res){
 
 exports.registrar = function(req,res){
 
-  var user = new User();
-  user.username = req.body.username;
-  user.password = req.body.password;
-  user.email = req.body.email;
 
   user.save(function(err){
     if(err){
