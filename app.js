@@ -11,7 +11,6 @@ var registrarRoute = require('./routes/registrar');
 
 var mongoose = require('mongoose');
 
-
 var expressLayouts = require('express-ejs-layouts');
 var app = express();
 
